@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+ <head>
+    <title>To do list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+        body{
+            display:flex;
+            height: 100vh;
+            justify-content:center;/*horizontali center*/
+            align-items: center; /*varical center*/
+            background-color:skyblue;
+        }
+        .container{
+            width: 40%;
+            max-width: 350px;
+            background-color: white;
+            max-height: 100px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px;
+        }
+        #newtask{
+            position:relative;/*p:relative top left padding*/
+            padding:30px 20px;
+            display:flex;
+            justify-content:space-between
+        }
+        #taskbar{
+            width: 75%;
+            height: 35px;
+            border: 2px solid black;
+            border-radius: 6px;
+            color: black;
+            font-weight: 400;
+            padding-left:5px; 
+        }
+        #taskbar:focus{
+            outline: none;
+            border-color: blueviolet;
+        }
+        #add{
+            width: 20%;
+            height: 35px;
+            /* border:2px solid black; */
+            border-radius:5px ;
+            font-weight: 500;
+            background-color: blue;
+            border: none;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+        #tasklist{
+            margin-bottom: 9px;
+            padding: 10px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+        .task{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: aliceblue;
+            height: 45px;
+            margin-bottom: 9px;
+            padding: 5px 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+        .delt{
+            color: red;
+            border-radius: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            outline: none;
+            width: 100%;
+            justify-content: space-between;
+        }
+    </style>
+ </head>
+     <body>
+          <div class="container">
+              <div id="newtask">
+               <input type="text" id="taskbar" placeholder="Enter Something....">
+                <button id="add">Add</button>
+              </div>
+              <div id="tasklist"></div>
+            </div>
+        <script>
+             let todoEle = document.getElementById("taskbar");
+             let tasklist = document.getElementById("tasklist");
+
+
+        document.getElementById("add").onclick = function() {
+             // Check if the input field is empty
+            if (todoEle.value.length == 0) {
+                   alert("Enter a task Details");
+               } 
+
+              else {
+                   // Add the new task to the task list
+                   tasklist.innerHTML += `
+                   <div class="task">
+                          <span id="work">${todoEle.value}</span>
+                       <button class="delt"><i class="fa fa-trash"></i></button>
+                    </div>`;
+
+                   // Clear the input field
+                    todoEle.value = "";
+
+                   // Add event listener to delete task button
+                   let alltasks = document.querySelectorAll(".delt");
+
+                    for (let i = 0; i < alltasks.length; i++) {
+                         alltasks[i].onclick = function() {
+                              console.log(this);  // This logs the button that was clicked
+                            this.parentNode.remove();  // Remove the parent task div
+                           }
+                        }
+                    }
+            }
+</script>
+</body>
+</html>
